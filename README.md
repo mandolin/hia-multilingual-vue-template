@@ -31,7 +31,7 @@ npm run build
 ### 使用方法
 - 直接clone本项目,在此基础上开发vue项目。（推荐）
 - 在你的项目中使用
-    1. npm i -D hia-multilingual-vue-template
+    1. `npm i -D hia-multilingual-vue-template`
     2. 建立好你自己的样式用语库和脚本用语库
     3. 配置你的vue.config.js 或者 webpack配置文件
         ```js
@@ -229,7 +229,7 @@ After installation，Please use file `./tool/pug-lexer/index.js` replace the rel
 ### Method of use
 - Clone this project directly, develop vue project on this basis. (recommend)
 - Use in your projects
-    1. npm i -D hia-multilingual-vue-template
+    1. `npm i -D hia-multilingual-vue-template`
     2. Establish your own styling and scripting thesaurus
     3. Configure your vue.config.js or webpack configuration file
         ```js
@@ -391,7 +391,7 @@ As a native Chinese developer, I still have a good command of English, but I alw
 Based on the above and more related factors, I gradually began to try to introduce more Chinese names in programming. After achieving good results, I have firmly established myself in the pace of Chinese development. The front-end is mainly used in the work, and vue is widely used in China. Therefore, it is decided to implement a multi-language mechanism based on vue to facilitate Chinese development.
 
 ### Meaning for programming individuals
-In a word: "This honey, the other frost." 
+In a word: "This honey, the other frost."
 
 
 # License
