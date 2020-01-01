@@ -5,7 +5,7 @@
 
 
 ## 前提
-已安装好node.js、已全局安装vue-cli。\
+已安装好node.js、已全局安装vue-cli。
 
 ## 项目安装
 ```
@@ -26,7 +26,7 @@ npm run build
 
 ### pug的中文id和中文样式类的速写形式支持
 安装好pug后，请使用tool文件夹中的 `pug-lexer/index.js` 替换 `node_module` 中的相应文件。
-（使pug能支持 `.中文类#中文id` 的写法）\
+（使pug能支持 `.中文类#中文id` 的写法）
 
 ### 使用方法
 - 直接clone本项目,在此基础上开发vue项目。（推荐）
@@ -144,7 +144,7 @@ npm run build
 
     ```
 
-###实现机制及效果
+### 实现机制及效果
 - 修改了pug-lexer的相关正则，使得用pug语言写template模板时支持中文样式类和中文id的速写形式
 - 用sass实现了一个混入(mixin)，使得可以使用中文写样式规则(须使用混入速写形式)
 - 通过引入webpack.DefinePlugin插件，使得可以在脚本中使用中文作为全局变量和对象属性(写法稍异)的名称。
@@ -194,7 +194,7 @@ npm run build
 基于以上及更多相关因素，本人逐渐开始尝试在编程中更多的引入中文名，取得不错效果后，从此坚定了自己走中文开发的步子。工作中以前端为主，而前端中vue在中国使用广泛，因此决定在vue基础上实现一套多语言机制方便中文开发。
 
 ### 对编程个体的意义
-一言蔽之：“此之蜜糖,彼之砒霜”。\
+一言蔽之：“此之蜜糖,彼之砒霜”。
 
 ---
 
@@ -391,7 +391,7 @@ As a native Chinese developer, I still have a good command of English, but I alw
 Based on the above and more related factors, I gradually began to try to introduce more Chinese names in programming. After achieving good results, I have firmly established myself in the pace of Chinese development. The front-end is mainly used in the work, and vue is widely used in China. Therefore, it is decided to implement a multi-language mechanism based on vue to facilitate Chinese development.
 
 ### Meaning for programming individuals
-In a word: "This honey, the other frost." \
+In a word: "This honey, the other frost." 
 
 
 # License
