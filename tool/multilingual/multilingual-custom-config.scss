@@ -1,0 +1,35 @@
+/** 多语言辅助sass库用户配置文件
+  * note 此文件用户可以置于其它指定的文件夹
+  * note This file can be placed in other folders
+  */
+
+$UserDefinedRuleNamingObj :
+(
+    colour     : color    ,
+    foreground : color    ,
+    pos        : position
+); //其它语言专用。For other language
+
+$用户自定义规则命名对象 :
+(
+    颜色  : color ,
+    背景  : background ,
+    背景色: background-color
+); //中文专用。For Chinese
+
+$UserDefinedValueNamingObj:
+(
+    rel : relative ,
+    yl  : yellow
+); //其它语言专用。For other language
+
+$用户自定义样式值命名对象 :
+(
+    相对  : relative      ,
+    浅绿色: lightgreen ,
+    浅蓝色: lightblue  ,
+    褐色  : brown      ,
+    黄色  : yellow
+); //中文专用。For Chinese
+
+

@@ -1,0 +1,17 @@
+# root=true是告诉EditorConfig插件，这是根文件，不用继续往上查找
+root = true
+
+# 匹配脚本文件
+[*.{js,jsx,ts,tsx,vue,json}]
+
+# 缩进风格，可选"space"、"tab"
+indent_style = space
+# 缩进的空格数
+indent_size = 4
+
+# 删除一行中的尾空格
+trim_trailing_whitespace = true
+# 在文件结尾插入新行
+insert_final_newline = true
+
+end_of_line = lf

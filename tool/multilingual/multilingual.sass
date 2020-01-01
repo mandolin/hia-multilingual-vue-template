@@ -1,0 +1,50 @@
+/** 多语言辅助sass库
+  * version 1.0.0
+  *
+  */
+
+@import 'multilingual-config.sass'//
+
+@function 获取值命名($值, $样式值命名对象) //todo 待研究,是否需要适应带逗号的样式值( note 多为动画一类,倾向于用混入加函数来解决)
+    $命名值: ''
+    @each $条目值 in $值
+            $命名: map-get($样式值命名对象, $条目值)
+            @if ($命名 == null)
+                $命名: $条目值
+            $命名值: $命名值 + $命名 + ' '
+    @return $命名值
+
+= _($规则, $值)
+    @if ($值 != false)
+        $命名    : map-get($规则命名对象, $规则)
+        @if ($命名 == null)
+            $命名: $规则
+        #{$命名} : #{获取值命名($值, $样式值命名对象)}
+    @else
+        @each $属性, $值 in $规则
+            $命名: map-get($规则命名对象, $属性)
+            @if ($命名 == null)
+                $命名: $属性
+            #{$命名}: #{获取值命名($值, $样式值命名对象)}
+
+/** 示例
+
+    .测试
+        +_(颜色, blue)
+        +_(边框, 175px double 红色)
+
+    .测试1
+        $v: (颜色: #453423,
+        背景色: red,
+        边框: 21px solid lightblue)
+        +_($v,false)
+
+  */
+
+/** note 如果后期有其它语种用户的需求，见 multilingual-config.sass 说明。也可以类似如下简单处理，比如建立等效mixin/function时调用原有的mixin/function即可。
+    note if you have any other language in the late of needs, see multilingual-config.sass. It can also be similar to the following simple processing, such as calling the original mixin/function when establishing equivalent mixin/function.
+
+    = _русский($правила, $значение)
+        +_($правила, $значение)
+
+  */

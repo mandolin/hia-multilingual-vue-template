@@ -1,0 +1,35 @@
+/** 多语言辅助sass库配置文件
+  * multilingual auxiliary sass library configuration file
+  * note 中文用户如需要自行定义用语，可以在自己的项目中（在引入multilingual.sass之前）引入单独的sass文件，在其中定义好 $用户自定义规则命名对象 并定义所需的键值对即可。
+  * note 如果其它语种用户有需求，则可以在自己的项目中（在引入multilingual.sass之前）引入单独的sass文件，在其中定义好 $UserDefinedRuleNamingObj $UserDefinedValueNamingObj 并定义所需的键值对即可。
+  * note if you have needs to add other language, you can import a separate sass file in your own project (before you import this file), where you can define $userdefinedrulenamingobj $UserDefinedValueNamingObj and the required key value pairs.
+  */
+$UserDefinedRuleNamingObj : ('colour': color)  !default //其它语言专用。For other language
+
+$用户自定义规则命名对象   : (颜色: color)    !default //中文专用。For Chinese
+
+$UserDefinedValueNamingObj: (pos: position)  !default //其它语言专用。For other language
+
+$用户自定义样式值命名对象 : (位置: position) !default //中文专用。For Chinese
+
+$规则命名对象: map-merge(('颜色' : color ,
+'定位'  : position         ,
+'位置'  : position         , //note 可以多义（多对一）。can polysemy (many-to-one)
+'层级'  : 'z-index'        ,
+'上'    : top              ,
+'右'    : right            ,
+'下'    : bottom           ,
+'左'    : left             ,
+'剪切'  : clip             ,
+'边框'  : border           ,
+'背景色': background-color), map-merge($UserDefinedRuleNamingObj, $用户自定义规则命名对象))
+
+$样式值命名对象: map-merge(('红色': red,
+'常规': static,
+'相对': relative,
+'绝对': absolute,
+'窗口': fixed,
+'吸附': sticky,
+'绿色': green,
+'双线': double,
+'实线': solid ), map-merge($UserDefinedValueNamingObj, $用户自定义样式值命名对象))
