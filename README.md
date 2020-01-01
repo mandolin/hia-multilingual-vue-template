@@ -1,31 +1,23 @@
-# hia-multilingual-vue-template
 # 多语言辅助开发框架模板
 
 适用于希望用中文开发vue前端应用的开发者。\
 理论上适用于任何希望用非英语语言开发的用户。
 
-Apply to  vue front-end application developers who wanna use Chinese for programming.\
-In theory it is applicable to any user whe wants to use the Non English language for development.
 
 ## 前提
-## Premise
 已安装好node.js、已全局安装vue-cli。\
-Node.js is installed and Vue cli is installed globally.
 
 ## 项目安装
-## Project setup
 ```
 npm install
 ```
 
 ### 编译并热加载调试
-### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
 ### 编译并打包为生产环境代码
-### Compiles and minifies for production
 ```
 npm run build
 ```
@@ -33,8 +25,8 @@ npm run build
 ## 说明
 
 ### pug的中文id和中文样式类的速写形式支持
-安装好pug后，请使用tool文件中的 `pug-lexer/index.js` 替换 `node_module` 中的相应文件。
-（使pug能支持 `.中文类#中文id` 的写法）
+安装好pug后，请使用tool文件夹中的 `pug-lexer/index.js` 替换 `node_module` 中的相应文件。
+（使pug能支持 `.中文类#中文id` 的写法）\
 
 ### 使用方法
 - 直接clone本项目,在此基础上开发vue项目。（推荐）
@@ -110,7 +102,7 @@ npm run build
             示例：var 某api对象 = {[命名]:'值'}; 某api函数调用(对象[属性][子属性]......[最终属性])
 
         2. 命名: 'name'，这样的形式，主要用于js环境的一些系统级全局变量、API、速写语法。
-            示例：
+            示例：某全局方法名();
 
     */
     //note 导入对象，属于局部变量，可直接中文命名。
@@ -175,7 +167,7 @@ npm run build
 另一方面，功能还很单薄，很多不足之处也很明显。\
 后期会不断改进。
 
-###一些需要注意的地方
+### 一些需要注意的地方
 
 #### 代码方面
     button(@click = '更新一些时间') //-无效
@@ -204,10 +196,203 @@ npm run build
 ### 对编程个体的意义
 一言蔽之：“此之蜜糖,彼之砒霜”。\
 
+---
+
+# hia-multilingual-vue-template
+
+Apply to  vue front-end application developers who wanna use Chinese for programming.\
+In theory it is applicable to any user whe wants to use the Non English language for development.
+
+## Premise
+Node.js is installed and Vue cli is installed globally.
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+### Compiles and minifies for production
+```
+npm run build
+```
+
+## Description
+
+### Make it usable for Chinese id and Chinese style class sketch form of pug
+After installation，Please use file `./tool/pug-lexer/index.js` replace the relevant file of `node_module` .
+（make the pug can support sketch form of `.中文类#中文id`）
+
+### Method of use
+- Clone this project directly, develop vue project on this basis. (recommend)
+- Use in your projects
+    1. npm i -D hia-multilingual-vue-template
+    2. Establish your own styling and scripting thesaurus
+    3. Configure your vue.config.js or webpack configuration file
+        ```js
+        const WEBPACK = require('webpack') ;
+        // Introduce your own script corpus file.
+        const MULTILINGUAL_CUSTOM = require('path to your cutom multilingual file') ;
+        // Introduce standard corpus files.
+        const MULTILINGUAL = require('hia-multilingual-vue-template/tool/multilingual/multilingual') ;
+        // Merge into a single object.
+        var DefineObj= Object.assign({
+            // You can also define some other compile-time global constants here.
+            //PRODUCTION: JSON.stringify(true),
+            //VERSION: JSON.stringify('1.0.0'),
+            //BROWSER_SUPPORTS_HTML5: true,
+            //'typeof window': JSON.stringify('object'),
+            //'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        },MULTILINGUAL,MULTILINGUAL_CUSTOM);
+
+        module.exports = {
+            configureWebpack: (config) => {
+                config.plugins.push(
+                    new WEBPACK.DefinePlugin(DefineObj)
+            ),
+            pluginOptions: {
+                // Automatically import the multi-language auxiliary sass library to avoid manual import in each sass file or block.
+                'style-resources-loader': {
+                    'preProcessor': 'sass',
+                    'patterns': [
+                        PATH.resolve(__dirname, 'path to your cutom multilingual sass/scss file'),//note Put your custom configuration files in where it is needed.
+                        PATH.resolve(__dirname, 'hia-multilingual-vue-template/tool/multilingual/multilingual.sass'),// Standard style corpus file
+                    ]
+                }
+            }
+        }
+        ```
+    4.  Then you can easily write styles and scripts in Chinese. See [Guide](#guide) below for details.
+
+### Guide
+- Write Chinese style
+    ```sass
+    $春色: 浅绿色
+    [主题=春天]
+        background: lightblue // note It is currently not possible to use Chinese in regular writing. (Theoretically, it is possible to support conventional Chinese after transforming sass)
+
+        // use mixin and write styles in Chinese throughout
+
+        // single style rule
+        +_(背景色          , 浅蓝色     )
+        +_(颜色            , 红色       )
+        +_(背景色          , $春色      )
+        +_(background-color, #3a3       ) //can be mixed with the original English name
+        +_(背景色          , lightgreen ) //can be mixed with the original English name
+        +_(background-color, $春色      ) //can be mixed with the original English name
+
+        //Block style of multiple style rules. note Note that in sass format, lists and maps cannot wrap after the opening parenthesis and before the closing parenthesis, otherwise errors will occur. If you want each definition to be on its own line, use scss format.
+        +_((颜色: #514d97,
+        背景色  : 绿色,
+        边框    : 121px 实线 浅蓝色), false)
+    ```
+- Write Chinese script
+    ```js
+    /*
+        Definition of terminology into two categories
+
+        1. Naming: '"name"', this form is used for some (English) API object properties.
+            Example: var some-api-object = {[name]: 'value'}; some api function call (object [attribute] [sub-attribute] ... [final attribute])
+
+        2. Naming: 'name', this form is mainly used for some system-level global variables, APIs, and sketch syntax in the js environment.
+            Example: a global method name ();
+
+    */
+    //note The imported object is a local variable and can be directly named in Chinese.
+    import V视图     from 'vue'               ;
+    import V状态管理 from 'vuex'              ;
+    import 用户      from './modules/user.js' ;
+
+    //note note Take `enable` as an example, as the attribute word in the corpus, it will be directly replaced with the value defined in the corpus at compile time: `"use"`
+    V视图[启用](V状态管理);
+
+    export default new V状态管理[状态设定]({
+        [状态数据]: {
+            登录信息:{
+                已登录      : false,    //
+                上次登录时间: null,     //
+                上次活跃时间: null,     //
+                本次操作时间: null,     //
+                过期时间    : 20*60*1000//
+            }
+        },
+        [变更集]: {
+            更新本次操作时间 (状态数据) {
+                //note Take `当前时间` as an example, define the vocabulary for the system level in the corpus, and it will be directly replaced with the value defined in the corpus during compilation:`new Date()`
+                状态数据.登录信息.本次操作时间 = 当前时间;
+                //note Take `控制台记录` as an example, define the vocabulary for the system level in the corpus, it will be directly replaced with the value defined in the corpus at compile time:`console.log`. note is sketched form
+
+                控制台记录('更新本次操作时间',状态数据.登录信息.本次操作时间);
+            }
+        },
+        [操作集]: {
+            更新本次操作时间: (上下文)=>{
+                控制台记录('更新本次操作时间 (上下文) ',上下文);
+                上下文[执行]('更新本次操作时间');
+            }
+        },
+        [模块集]: {
+            用户:用户
+        }
+    });
+
+    ```
+
+### Implementation mechanism and effect
+- Modified the related rules of pug-lexer so that when writing template templates in pug language, Chinese style classes and Chinese id sketches are supported
+- Implemented a mixin with sass, making it possible to write style rules in Chinese (must use the mixin sketch form)
+- Through the introduction of the webpack.DefinePlugin plugin, it is possible to use Chinese as the name of global variables and object attributes (slightly different) in the script.
+
+### Features and shortcomings
+- Benefits are:
+    - No need to modify the API of various libraries or fork out a localized library. It also means that there is no difference to the original API call.
+    - Developers can set custom terms according to their own semantic preferences, without having to be kidnapped by a uniform semantic language style.
+    - Developers can create all kinds of sketch words suitable for their use. See [Guide] (#Guide) above.
+
+- The disadvantages are:
+    - js object attributes are written slightly differently and need to be adapted. (For full compatibility with conventional writing, in theory, it can be solved by modifying the webpack plugin)
+    - Some features such as syntax highlighting will fail (requires targeted plugins to resolve).
+    - A small number of special keywords are temporarily unavailable for this method (but theoretically can be solved by modifying the webpack plugin).
+    - The sketching of local variables is not supported (because it will be converted by uglifyjs. If you want to support it, you need to modify the defineplugin plug-in to execute in advance or develop a targeted plug-in). For the time being, you can solve the problem by adjusting the build process. , Or do a separate post-processing process).
+    - Sass does not support Chinese in regular single style rules (but in theory, it can be solved by modifying sass).
+    - Any keywords, apis, variables, etc. in eval must use the original name. (It is expected to be difficult to solve in the future, because js does not alias keywords like python)
+
+Overall, the project has achieved a wide range of Chinese availability in the most streamlined manner, with an outstanding efficiency ratio. \
+On the other hand, the functions are very thin and many shortcomings are obvious. \
+It will continue to improve in the later stages.
+
+### Some things to note
+
+#### Code aspect
+    button (@click = 'Update some time') //-Invalid
+    /* Require parentheses: */ button (@click = 'Update some time ()')
+    //- English name method does not have this problem
+
+#### Corpus
+This application is still in the demo state, and the standard corpus is just beginning to be established. If you want to use this framework in your development environment immediately, you need to build and improve your own corpus at least.
+
+#### Chinese and English mixed
+Suggestions for use (for reference only): Chinese is appropriate in some cases (most commonly in scenarios where readability is more important), and English, especially short characters, is appropriate in some situations (mostly in scenarios where you need to quickly enter code, such as quick Implement some logically concise but grammatically private methods, etc.), please consider combining them to find the best way to use them.
+
+#### Applicable items
+- Recommended for personal projects.
+- If it is implemented in a team project, it needs to be carefully considered at present. There are two main points:
+    1. Personalized individual differences in terms may exceed imagination, which will have varying degrees of impact on team communication.
+    2. Each person's acceptance of Chinese codes is different, and the gain is different (even may be negative for some individuals).
+
+    There are also solutions: use their own termbases during development, and convert to standard library terms (multiple sets) when communication is required, but this depends on the term conversion function (not yet implemented, considered later).
+
+### Why Chinese Development
+The experience of many years of development has given me an inspiration: the time and effort required to change and read the code is far more than writing code. \
+As a native Chinese developer, I still have a good command of English, but I always have a bump in the speed of reading and understanding. After all, each person's language talents have innate differences, which may not be able to make up (or cost a lot). (There are also differences and influences between pictographs and phonetics in Chinese and English, which are also additional factors. These can be viewed in many related discussions in this regard). \
+Based on the above and more related factors, I gradually began to try to introduce more Chinese names in programming. After achieving good results, I have firmly established myself in the pace of Chinese development. The front-end is mainly used in the work, and vue is widely used in China. Therefore, it is decided to implement a multi-language mechanism based on vue to facilitate Chinese development.
+
+### Meaning for programming individuals
+In a word: "This honey, the other frost." \
+
+
 # License
-MIT
-
-
-Some situations is appropriate in your native language (more important see more at readability scenarios), some cases suitable especially short characters in English (see more at need fast input code scenarios, such as some private methods internal methods, etc.), please consider using a combination, to find the best way of use.
-
-
+MIT 2020 mandolin.mdy@gmail.com
