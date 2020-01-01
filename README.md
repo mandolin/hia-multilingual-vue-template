@@ -11,6 +11,9 @@
 ```
 npm install
 ```
+### pug的中文id和中文样式类的速写形式支持
+安装好后，请使用tool文件夹中的 `pug-lexer/index.js` 替换 `node_module` 中的相应文件。
+（使pug能支持 `.中文类#中文id` 的写法）
 
 ### 编译并热加载调试
 ```
@@ -23,10 +26,6 @@ npm run build
 ```
 
 ## 说明
-
-### pug的中文id和中文样式类的速写形式支持
-安装好pug后，请使用tool文件夹中的 `pug-lexer/index.js` 替换 `node_module` 中的相应文件。
-（使pug能支持 `.中文类#中文id` 的写法）
 
 ### 使用方法
 - 直接clone本项目,在此基础上开发vue项目。（推荐）
@@ -159,7 +158,7 @@ npm run build
     - js对象属性写法上稍异,需要适应。（如需完全兼容常规写法，理论上可以通过修改webpack插件来解决）
     - 一些语法高亮等特性会失效（需要针对性的插件来解决）。
     - 少量特殊关键字暂时无法运用此法（但理论上可以通过修改webpack插件来解决）。
-    - 局部变量的速写不支持(因为会被uglifyjs转换，如要支持的话，需要改造defineplugin插件提前执行或者开发一个针对性的插件)，暂时可以通过调整构建流程来解决(将uglifyjs处理防在最后一步，或者单独做一个后处理流程)。
+    - 局部变量的速写不支持(因为会被uglifyjs转换，如要支持的话，需要改造defineplugin插件提前执行或者开发一个针对性的插件)，暂时可以通过调整构建流程来解决(将uglifyjs处理放在最后一步，或者单独做一个后处理流程)。
     - sass中不支持在常规单条样式规则中用中文（但理论上可以通过修改sass来解决）。
     - eval中的任何关键字、api、变量等必须使用原始命名。（预计到将来都难以解决，因为js不像python能给关键字起别名）
 
@@ -211,6 +210,10 @@ Node.js is installed and Vue cli is installed globally.
 npm install
 ```
 
+### Make it usable for Chinese id and Chinese style class sketch form of pug
+After installation，Please use file `./tool/pug-lexer/index.js` replace the relevant file of `node_module` .
+（make the pug can support sketch form of `.中文类#中文id`）
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
@@ -222,9 +225,6 @@ npm run build
 
 ## Description
 
-### Make it usable for Chinese id and Chinese style class sketch form of pug
-After installation，Please use file `./tool/pug-lexer/index.js` replace the relevant file of `node_module` .
-（make the pug can support sketch form of `.中文类#中文id`）
 
 ### Method of use
 - Clone this project directly, develop vue project on this basis. (recommend)
@@ -356,7 +356,7 @@ After installation，Please use file `./tool/pug-lexer/index.js` replace the rel
     - js object attributes are written slightly differently and need to be adapted. (For full compatibility with conventional writing, in theory, it can be solved by modifying the webpack plugin)
     - Some features such as syntax highlighting will fail (requires targeted plugins to resolve).
     - A small number of special keywords are temporarily unavailable for this method (but theoretically can be solved by modifying the webpack plugin).
-    - The sketching of local variables is not supported (because it will be converted by uglifyjs. If you want to support it, you need to modify the defineplugin plug-in to execute in advance or develop a targeted plug-in). For the time being, you can solve the problem by adjusting the build process. , Or do a separate post-processing process).
+    - The sketching of local variables is not supported (because it will be converted by uglifyjs. If you want to support it, you need to modify the defineplugin plug-in to execute in advance or develop a targeted plug-in). For the time being, you can solve the problem by adjusting the build process (put the uglifyjs processing in the last step , Or do a separate post-processing process).
     - Sass does not support Chinese in regular single style rules (but in theory, it can be solved by modifying sass).
     - Any keywords, apis, variables, etc. in eval must use the original name. (It is expected to be difficult to solve in the future, because js does not alias keywords like python)
 
